@@ -2,7 +2,7 @@ gdt:
 
 gdt_null:
 	dq 0
-	
+
 gdt_code:
 	dw 0xFFFF
 	dw 0
@@ -10,7 +10,7 @@ gdt_code:
 	db 10011010b
 	db 11001111b
 	db 0
-	
+
 gdt_data:
 	dw 0xFFFF
 	dw 0
