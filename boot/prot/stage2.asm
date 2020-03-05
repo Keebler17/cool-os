@@ -11,8 +11,6 @@ mov cr0, eax
 
 jmp CODE:pm
 
-pm:
-
 BITS 32
 
 pm:

@@ -1,3 +1,5 @@
+#include "include/io/print.h"
+
 int kmain() {
 	volatile unsigned char *vram = (volatile unsigned char*)0x0B8000;
 	char *cool = "this is epic\0";
@@ -6,6 +8,8 @@ int kmain() {
 		vram[ptr] = cool[i];
 		ptr += 2;
 	}
+
+	// printch(vram, 'a');
 
 	return 0;
 }
