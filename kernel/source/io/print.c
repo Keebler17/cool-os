@@ -1,5 +1,5 @@
-#include "print.h"
+#include "../../include/io/print.h"
 
-void printch(volatile unsigned char *vram, char ch) {
+void cprintch(volatile unsigned char *vram, char ch) {
 	*vram = ch;
 }

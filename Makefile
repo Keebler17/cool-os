@@ -1,35 +1,35 @@
-C_SOURCES = $(wildcard *.c)
-C_HEADERS = $(wildcard *.h)
+rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d)) # found this on stackoverflow lol
+
+C_SOURCES = $(call rwildcard,., *.c)
+C_HEADERS = $(call rwildcard,., *.h)
 
 OBJ = ${C_SOURCES:.c=.o}
 
-CC = $HOME/opt/cross/bin/i386-elf-gcc
+CC = ~/opt/cross-i386/bin/i386-elf-gcc
 
 CFLAGS = -g
 
-os.bin: boot.bin kernel.bin
+run: os.bin
+	qemu-system-x86_64 -s $<
+
+os.bin: boot/boot.bin kernel.bin
 	cat $^ > $@
 
-# link together
+# link togethers
 
-
-kernel.bin: entry.o kernel.o ${OBJ}
+kernel.bin: kernel/entry.o ${OBJ}
 	i386-elf-ld -o $@ -Ttext 0x8000 $^ --oformat binary
 
-# compiling
+# wildcards
 
-%.o: %.c ${HEADERS}
-	${CC} -ffreestanding -c elf -o $@
+%.o: %.c {HEADERS}
+	${CC} ${CFLAGS} -ffreestanding -c $^ -o $@
+
+%.o: %.asm
+	nasm $^ -f elf -o $@
 
 %.bin: %.asm
-	nasm $< -f bin -o $@
-
-# running
-
-run: os.bin
-	qemu-system-x86_64 -s os.bin
+	nasm $^ -f bin -o $@
 
 clean:
-	mv os.bin os.bin.0
-	rm *.o *.bin
-	mv os.bin.0 os.bin
+	rm *.bin ${OBJ}
