@@ -12,17 +12,18 @@ os.bin: boot.bin kernel.bin
 
 # link together
 
-kernel.bin: entry.o ${OBJ}
-	i386-elf-ld -o $@ -Ttext 0x8000 $^ --oformat binary
 
+kernel.bin: entry.o kernel.o ${OBJ}
+	i386-elf-ld -o $@ -Ttext 0x8000 $^ --oformat binary
 
 # compiling
 
 %.o: %.c ${HEADERS}
-	nasm ${CC} -f elf -o $@
+	${CC} -ffreestanding -c elf -o $@
 
 %.bin: %.asm
 	nasm $< -f bin -o $@
+
 # running
 
 run: os.bin
