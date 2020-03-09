@@ -1,6 +1,6 @@
-#include "../../include/io/io.h"
+#include "../include/io.h"
 
-#include "../../include/math.h"
+#include "../include/math.h"
 
 // TODO: move IO into /include and /source to avoid #include "include/io/io.h" which looks ugly
 
@@ -12,15 +12,16 @@ int strlen(char *str) {
   return len;
 }
 
-int intlen(int i) {
-  int len = 0;
-  if (len )
-}
-
 char citoa(int n) {
-  return i + 0x30;
+  return n + 0x30;
 }
 
 char *itoa(int n) {
-  for(int i = 0; i <
+  int len = intlen(n);
+  char *ret = "2147483647\0";
+  int ptr = 0;
+  for(int i = len; i > 0; i--) {
+
+    ret[ptr] = citoa('e');
+  }
 }
