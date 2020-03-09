@@ -11,16 +11,17 @@ CFLAGS = -g
 
 run: os.bin
 	qemu-system-x86_64 -s $<
+	make clean
 
 os.bin: boot/boot.bin kernel.bin
 	cat $^ > $@
 
-# link togethers
+# link together
 
 kernel.bin: kernel/entry.o ${OBJ}
 	i386-elf-ld -o $@ -Ttext 0x8000 $^ --oformat binary
 
-# wildcards
+# wildcards/compiling
 
 %.o: %.c {HEADERS}
 	${CC} ${CFLAGS} -ffreestanding -c $^ -o $@
@@ -32,4 +33,4 @@ kernel.bin: kernel/entry.o ${OBJ}
 	nasm $^ -f bin -o $@
 
 clean:
-	rm *.bin ${OBJ}
+	rm $(call rwildcard,., *.o) $(call rwildcard,., *.bin)
