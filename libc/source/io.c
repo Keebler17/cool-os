@@ -22,6 +22,13 @@ char *itoa(int n) {
   int ptr = 0;
   for(int i = len; i > 0; i--) {
 
-    ret[ptr] = citoa('e');
+    ret[ptr] = citoa(firstDigit(truncate(n, i)));
+    ptr++;
   }
+  ret[ptr] = '\0';
+  return ret;
+}
+
+void cprint(volatile unsigned char *vram, char *ch) {
+	for(int i = 0; i < )
 }
