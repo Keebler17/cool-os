@@ -40,7 +40,7 @@ disk_error:
 	jmp $
 
 drive db 0
-sectors db 2
+sectors db 3
 
 %include "boot/real/print.asm"
 

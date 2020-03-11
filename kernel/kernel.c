@@ -1,13 +1,12 @@
 #include "../libc/include/io.h"
 #include "../libc/include/math.h"
 
-int kmain() {
+int kmain() { // IF YOU ARE GETTING AN ERROR ON A FUNCTION AND IT MAKES NO SENSE TRY INCREASING SECTORS IN boot/boot.asm
 	volatile unsigned char *vram = (volatile unsigned char*)0x0B8000;
 
 	char *ascii = itoa(27);
 
-	cprintch(vram, ascii[0]);
-	cprintch(vram+2, ascii[1]);
+	cprint(vram, ascii);
 
 	return 0;
 }

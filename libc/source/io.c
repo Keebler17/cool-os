@@ -6,7 +6,7 @@
 
 int strlen(char *str) {
   int len = 0;
-  while(*str != 0) {
+  while(str[len] != '\0') {
     len++;
   }
   return len;
@@ -30,5 +30,7 @@ char *itoa(int n) {
 }
 
 void cprint(volatile unsigned char *vram, char *ch) {
-	for(int i = 0; i < )
+	for(int i = 0; i < strlen(ch); i++) {
+    vram[i*2] = ch[i];
+  }
 }
