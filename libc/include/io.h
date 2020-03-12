@@ -6,7 +6,7 @@
 int strlen(char *str);
 
 char citoa(int n);
-char *itoa(int n);
+char *itoa(int n, int base);
 
 void cprint(volatile unsigned char *vram, char *ch);
 

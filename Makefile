@@ -33,4 +33,5 @@ kernel.bin: kernel/entry.o ${OBJ}
 	nasm $^ -f bin -o $@
 
 clean:
+	mv os.bin os.bin.0
 	rm $(call rwildcard,., *.o) $(call rwildcard,., *.bin)

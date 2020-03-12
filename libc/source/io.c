@@ -13,16 +13,20 @@ int strlen(char *str) {
 }
 
 char citoa(int n) {
-  return n + 0x30;
+  if(n < 0xA) {
+    return n + 0x30;
+  } else {
+    return n + 0x37;
+  }
 }
 
-char *itoa(int n) {
-  int len = intlen(n);
-  char *ret = "2147483647\0";
+char *itoa(int n, int base) {
+  int len = intlen(n, base);
+  char *ret = "1111111111111111111111111111111\0";
   int ptr = 0;
   for(int i = len; i > 0; i--) {
 
-    ret[ptr] = citoa(firstDigit(truncate(n, i)));
+    ret[ptr] = citoa(firstDigit(truncate(n, i, base), base));
     ptr++;
   }
   ret[ptr] = '\0';

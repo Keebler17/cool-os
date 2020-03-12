@@ -8,12 +8,12 @@ int power(int base, int exponent) {
   return result;
 }
 
-int intlen(int n) {
+int intlen(int n, int base) {
   int len = 1;
 
   loop:
-    if(n / 10 > 0) {
-      n /= 10;
+    if(n / base > 0) {
+      n /= base;
       len++;
       goto loop;
     }
@@ -21,13 +21,14 @@ int intlen(int n) {
     return len;
 }
 
-int firstDigit(int n) {
-  for(int i = 0; i < intlen(n)-1; i++) {
-    n /= 10;
+int firstDigit(int n, int base) {
+  int loops = intlen(n, base)-1;
+  for(int i = 0; i < loops; i++) {
+    n /= base;
   }
   return n;
 }
 
-int truncate(int n, int digits) {
-  return n % power(10, digits);
+int truncate(int n, int digits, int base) {
+  return n % power(base, digits);
 }
