@@ -2,6 +2,7 @@
 #define IO
 
 #include "io/print.h"
+#include "io/ports.h"
 
 int strlen(char *str);
 
